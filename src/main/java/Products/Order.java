@@ -13,13 +13,14 @@ public class Order {
     private LocalDateTime orderTime;
     private String status;
 
-    public Order(String orderId, LocalDateTime orderTime, Map<Product, Integer> products, Customer customer) {
+    public Order(String orderId, Customer customer , LocalDateTime orderTime) {
         this.orderId = orderId;
         this.orderTime = orderTime;
         this.products = new HashMap<>();
         this.customer = customer;
         this.status = "Pending";
     }
+
 
     public String getOrderId() {
         return orderId;
