@@ -13,7 +13,7 @@ public class ECommerceManagementSystem {
     private List<Product> products;
     private List<Order> orders;
 
-    public ECommerceManagementSystem(List<Customer> customers, List<Product> products, List<Order> orders) {
+    public ECommerceManagementSystem() {
         this.customers = new ArrayList<>();
         this.products = new ArrayList<>();
         this.orders = new ArrayList<>();
@@ -68,10 +68,14 @@ public class ECommerceManagementSystem {
         return null;
     }
 
-    public void addProductToOrder(String orderId , Product product , int quantity){
+    public void addProductToOrder(String orderId, Product product, int quantity) {
+        if (product.getStock() < quantity) {
+            throw new IllegalArgumentException("Out of stock");
+        }
         for (Order order : orders) {
-            if(order.getOrderId().equals(orderId)){
+            if (order.getOrderId().equals(orderId)) {
                 order.addProduct(product, quantity);
+                product.setStock(product.getStock() - quantity);
                 break;
             }
         }
